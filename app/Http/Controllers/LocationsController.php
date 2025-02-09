@@ -48,6 +48,15 @@ class LocationsController extends Controller
         //
     }
 
+    /**
+     * Get all locations
+     * 
+     * @response array<array{
+     *   region: string,
+     *   state?: string ,
+     *   city?: string,
+     * }>
+     */
     public function getLocations(Request $request)
     {
         $user = $request->user();
@@ -55,7 +64,7 @@ class LocationsController extends Controller
         $response = Http::get('https://servicodados.ibge.gov.br/api/v1/localidades/distritos');
 
         if ($response->failed()) {
-            return response()->json(['message' => 'Failed to fetch data from IBGE API'], 500);
+            return response()->json(['message' => 'Failed to fetch data from IBGE API'], 400);
         }
 
         $districts = $response->json();
