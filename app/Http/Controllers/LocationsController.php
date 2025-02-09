@@ -5,49 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Cache;
 
 class LocationsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
-
     /**
      * Get all locations
      * 
@@ -60,14 +21,15 @@ class LocationsController extends Controller
     public function getLocations(Request $request)
     {
         $user = $request->user();
+        
+        $districts = Cache::remember('ibge_districts', 3600, function () {
+            $response = Http::get('https://servicodados.ibge.gov.br/api/v1/localidades/distritos');
 
-        $response = Http::get('https://servicodados.ibge.gov.br/api/v1/localidades/distritos');
-
-        if ($response->failed()) {
-            return response()->json(['message' => 'Failed to fetch data from IBGE API'], 400);
-        }
-
-        $districts = $response->json();
+            if ($response->failed()) {
+                abort(400, 'Failed to fetch data from IBGE API');
+            }
+            return $response->json();
+        });
 
         $filtered = [];
 

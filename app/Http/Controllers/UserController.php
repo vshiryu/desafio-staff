@@ -19,8 +19,9 @@ class UserController extends Controller
 
     /**
      * Create a new user.
-     * @status 201
-     * @unaunthenticated
+     * 
+     * @unauthenticated
+     * 
      * @response User
      */
     public function store(Request $request)
