@@ -23,5 +23,13 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        //
+        $exceptions->render(function (\Illuminate\Auth\AuthenticationException $exception, $request) {
+            return response()->json(['message' => 'Unauthenticated.'], 401);
+        });
+
+        $exceptions->render(function (NotFoundHttpException $exception, $request) {
+            return response()->json([
+                'message' => 'Resource not found.',
+            ], 404);
+        });
     })->create();
