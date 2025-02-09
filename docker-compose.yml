@@ -17,7 +17,7 @@ services:
       - db
     env_file:
       - .env
-    command: sh -c "php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=80"
+    command: sh -c "composer install --no-dev --prefer-dist && php artisan key:generate && php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=80"
 
   db:
     image: postgres:13

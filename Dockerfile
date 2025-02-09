@@ -11,6 +11,7 @@ RUN apk add --no-cache \
     libpng-dev \
     nodejs \
     npm \
+    bash \
     sqlite-libs \
     postgresql-dev \
     && docker-php-ext-configure zip \
@@ -36,8 +37,6 @@ COPY --from=composer:2.7.6 /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www/html
 
 COPY . .
-
-RUN cp .env.example .env
 
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 775 /var/www/html/storage \
