@@ -21,11 +21,24 @@ RUN apk add --no-cache \
 
 RUN docker-php-ext-install pdo pdo_pgsql
 
+RUN apk add --no-cache \
+    autoconf \
+    gcc \
+    g++ \
+    make \
+    redis \
+    && pecl install redis \
+    && docker-php-ext-enable redis
+
+
 COPY --from=composer:2.7.6 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 
 COPY . .
+
+RUN cp .env.example .env
+
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 775 /var/www/html/storage \
     && chmod -R 775 /var/www/html/bootstrap/cache
