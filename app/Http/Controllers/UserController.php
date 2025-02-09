@@ -51,7 +51,8 @@ class UserController extends Controller
             'name'     => 'sometimes|required|string|max:255',
             'email'    => ['sometimes', 'required', 'email', Rule::unique('users')->ignore($user->id)],
             'password' => 'sometimes|required|string|min:6',
-            'role'     => 'sometimes|required|integer|in:1,2,3',
+            'role'     => 'sometimes|required|string|in:admin,manager,user',
+            'access_level' => 'sometimes|required|integer|in:1,2,3',
         ]);
 
         if (isset($data['password'])) {
