@@ -60,16 +60,6 @@ http://localhost:8080
 ```
 http://localhost:8080/docs/api
 ```
-### Testando a API com Insomnia
-
-Opcionalmente, você pode importar o arquivo `Insomnia.json`, localizado na raiz do projeto, no Insomnia para testar as rotas da API.
-
-- Como fazer:
-  - Abra o Insomnia.
-  - Clique em **Import** >> **Choose Files** >> Scan
-  - Selecione o arquivo `Insomnia.json`.
-  - Todas as rotas da API estarão disponíveis para teste no Insomnia.
-
 
 - Caso precise parar os containers, utilize:
 
@@ -82,4 +72,14 @@ docker-compose down
 ```bash
 docker-compose up
 ```
+
+### Testando a API com Insomnia
+
+Opcionalmente, você pode importar o arquivo `Insomnia.json`, localizado na raiz do projeto, no Insomnia para testar as rotas da API.
+
+- Como fazer:
+  - Abra o Insomnia.
+  - Clique em **Import** >> **Choose Files** >> Scan
+  - Selecione o arquivo `Insomnia.json`.
+  - Todas as rotas da API estarão disponíveis para teste no Insomnia.
 
