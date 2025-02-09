@@ -2,6 +2,22 @@
 
   # Documentação
 
+## Descrição da Aplicação
+
+### Funcionalidades principais:
+
+- CRUD de Usuários: Permite criar, atualizar, listar e deletar usuários, com controle de acesso baseado em níveis.
+- Integração com a API do IBGE: Realiza consultas às localidades brasileiras, como estados e cidades.
+
+### Cache com Redis
+
+Para otimizar o desempenho e reduzir o número de requisições externas, foi implementado um sistema de cache utilizando Redis. O cache é utilizado principalmente para armazenar as respostas da API do IBGE.
+
+- Como funciona:
+  - Ao realizar uma consulta na API do IBGE, a aplicação armazena a resposta no Redis por uma hora.
+  - Caso a mesma consulta seja realizada novamente dentro do período de cache, a resposta será retornada diretamente do Redis, sem a necessidade de uma nova requisição à API externa.
+
+
 ## Requisitos
 Antes de começar, certifique-se de que você tem os seguintes itens instalados em sua máquina:
 
